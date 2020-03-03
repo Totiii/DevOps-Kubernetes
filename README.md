@@ -8,3 +8,10 @@
 - Prometheus
 - Grafana
 - kubeAPIServer (pour google auth)
+
+## Liens:
+https://hub.docker.com/_/wordpress
+
+# Commandes:
+> kubectl apply -f config.yml  
+> kubectl port-forward pod/wordpress 8080:80
