@@ -44,6 +44,7 @@ spec:
         app: wordpress
         tier: mysql
     spec:
+      serviceAccountName: clusteradmin
       containers:
         - image: mysql:5.6
           name: mysql
@@ -59,7 +60,27 @@ spec:
           volumeMounts:
             - name: mysql-persistent-storage
               mountPath: /var/lib/mysql
+            - name: climount
+              mountPath: /var/run/secrets/kubernetes.io/serviceaccount/climount
+            - name: clusteradminmount
+              mountPath: /var/run/secrets/kubernetes.io/serviceaccount/clusteradminmount
+            - name: devmount
+              mountPath: /var/run/secrets/kubernetes.io/serviceaccount/devmount
+            - name: sisopsmount
+              mountPath: /var/run/secrets/kubernetes.io/serviceaccount/sisopsmount
       volumes:
         - name: mysql-persistent-storage
           persistentVolumeClaim:
             claimName: mysql-pv-claim
+        - name: climount
+          secret:
+            secretName: cli-token-w572w
+        - name: clusteradminmount
+          secret:
+            secretName: clusteradmin-token-qx4cf
+        - name: devmount
+          secret:
+            secretName: dev-token-wpgks
+        - name: sisopsmount
+          secret:
+            secretName: sysops-token-v57s5

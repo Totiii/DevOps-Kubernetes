@@ -1,0 +1,50 @@
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: cr1
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get", "list", "watch", "patch"]
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: clusteradmin1
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list", "watch", "patch"]
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: sysops1
+rules:
+- apiGroups: [""]
+  resources: ["services"]
+  verbs: ["get", "list", "watch", "patch"]
+- apiGroups: [""]
+  resources: ["deployements"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get", "list", "watch", "patch"]
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: dev1
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list", "watch", "patch"]
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: cli1
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list", "watch"]

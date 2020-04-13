@@ -44,24 +44,35 @@ spec:
         app: wordpress
         tier: frontend
     spec:
+      serviceAccountName: cli
       containers:
-      - image: wordpress:4.8-apache
-        name: wordpress
-        env:
-        - name: WORDPRESS_DB_HOST
-          value: wordpress-mysql
-        - name: WORDPRESS_DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mysql-pass
-              key: password
-        ports:
-        - containerPort: 80
+        - image: wordpress:4.8-apache
           name: wordpress
-        volumeMounts:
-        - name: wordpress-persistent-storage
-          mountPath: /var/www/html
+          env:
+            - name: WORDPRESS_DB_HOST
+              value: wordpress-mysql
+            - name: WORDPRESS_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-pass
+                  key: password
+          ports:
+            - containerPort: 80
+              name: wordpress
+          volumeMounts:
+            - name: wordpress-persistent-storage
+              mountPath: /var/www/html
+            - name: climount
+              mountPath: /var/run/secrets/kubernetes.io/serviceaccount/climount
+            - name: devmount
+              mountPath: /var/run/secrets/kubernetes.io/serviceaccount/devmount
       volumes:
-      - name: wordpress-persistent-storage
-        persistentVolumeClaim:
-          claimName: wp-pv-claim
+        - name: wordpress-persistent-storage
+          persistentVolumeClaim:
+            claimName: wp-pv-claim
+        - name: climount
+          secret:
+            secretName: cli-token-w572w
+        - name: devmount
+          secret:
+            secretName: dev-token-wpgks
