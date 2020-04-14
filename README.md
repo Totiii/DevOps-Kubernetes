@@ -13,9 +13,18 @@ https://hub.docker.com/_/wordpress
 
 https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/
 
-# Commandes:
-> kubectl apply -f config.yml  
-> kubectl port-forward pod/wordpress 8080:80
+# Wordpress:
+
+Install: 
+```
+> kubectl apply -k ./
+> minikube service wordpress --url
+```
+Delete:
+```
+> kubectl delete -k ./
+```
+
 
 # RBAC:
 
@@ -104,15 +113,4 @@ Check if everything is working:
 > curl -H "Authorization: Bearer $TOKEN" https://kubernetes/api/v1/<resource-name> --insecure #if you get the result that means you have the perms to see it, if not, you don't have the right perms to see
 ```
 
-# Wordpress:
-
-Install: 
-```
-> kubectl apply -k ./
-> minikube service wordpress --url
-```
-Delete:
-```
-> kubectl delete -k ./
-```
 
