@@ -10,6 +10,7 @@
 
 ## Liens:
 https://hub.docker.com/_/wordpress
+https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/
 
 # Commandes:
 > kubectl apply -f config.yml  
